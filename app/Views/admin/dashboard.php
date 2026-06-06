@@ -13,22 +13,22 @@ ob_start();
             <div class="dashboard-grid">
                 <div class="dashboard-card">
                     <h3>Instructors</h3>
-                    <div class="count"><?= $totalInstructors ?></div>
+                    <div class="count"><?= $totalInstructors ?? 0 ?></div>
                     <a href="/admin/instructors" class="btn-primary">Manage Instructors</a>
                 </div>
                 <div class="dashboard-card">
                     <h3>Subjects</h3>
-                    <div class="count"><?= $totalSubjects ?></div>
+                    <div class="count"><?= $totalSubjects ?? 0 ?></div>
                     <a href="/admin/subjects" class="btn-primary">Manage Subjects</a>
                 </div>
                 <div class="dashboard-card">
                     <h3>Sections</h3>
-                    <div class="count"><?= $totalSections ?></div>
+                    <div class="count"><?= $totalSections ?? 0 ?></div>
                     <a href="/admin/sections" class="btn-primary">Manage Sections</a>
                 </div>
                 <div class="dashboard-card">
                     <h3>Students</h3>
-                    <div class="count"><?= $totalStudents ?></div>
+                    <div class="count"><?= $totalStudents ?? 0 ?></div>
                     <a href="/admin/students" class="btn-primary">View All Students</a>
                 </div>
             </div>
