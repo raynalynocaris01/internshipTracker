@@ -36,9 +36,52 @@ abstract class BaseController {
         return isset($_SESSION['role']) && $_SESSION['role'] === 'student';
     }
     
+    protected function requireAdmin() {
+        if (!$this->isAdmin()) {
+            $this->forbidden();
+        }
+    }
+    
+    protected function requireTeacher() {
+        if (!$this->isTeacher()) {
+            $this->forbidden();
+        }
+    }
+    
+    protected function requireStudent() {
+        if (!$this->isStudent()) {
+            $this->forbidden();
+        }
+    }
+    
+    protected function ensureMethod(string $method) {
+        if ($_SERVER['REQUEST_METHOD'] !== strtoupper($method)) {
+            http_response_code(405);
+            echo "Method not allowed";
+            exit();
+        }
+    }
+    
+    protected function sanitizeString($value) {
+        return trim(filter_var($value, FILTER_SANITIZE_STRING));
+    }
+    
+    protected function sanitizeInt($value) {
+        return intval($value);
+    }
+    
+    protected function forbidden() {
+        if (!$this->isLoggedIn()) {
+            $this->redirect('/login');
+        }
+        http_response_code(403);
+        echo "403 Forbidden";
+        exit();
+    }
+    
     protected function render($view, $data = []) {
         extract($data);
-        require_once __DIR__ . "/../../Views/{$view}.php";
+        require_once __DIR__ . "/../Views/{$view}.php";
     }
     
     protected function redirect($url) {

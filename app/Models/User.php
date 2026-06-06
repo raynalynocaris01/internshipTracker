@@ -64,8 +64,43 @@ class User {
             $params[] = password_hash($data['password'], PASSWORD_DEFAULT);
         }
         
+        if (empty($fields)) {
+            return false;
+        }
+        
         $params[] = $id;
         $sql = "UPDATE users SET " . implode(', ', $fields) . " WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    }
+    
+    public function updateByRefId($refId, $data) {
+        $fields = [];
+        $params = [];
+
+        if (isset($data['full_name'])) {
+            $fields[] = "full_name = ?";
+            $params[] = $data['full_name'];
+        }
+        if (isset($data['username'])) {
+            $fields[] = "username = ?";
+            $params[] = $data['username'];
+        }
+        if (isset($data['password'])) {
+            $fields[] = "password = ?";
+            $params[] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+        if (isset($data['role'])) {
+            $fields[] = "role = ?";
+            $params[] = $data['role'];
+        }
+
+        if (empty($fields)) {
+            return false;
+        }
+
+        $params[] = $refId;
+        $sql = "UPDATE users SET " . implode(', ', $fields) . " WHERE ref_id = ?";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($params);
     }

@@ -6,7 +6,8 @@ class Database {
     private $pdo;
     
     private function __construct() {
-        $config = require_once __DIR__ . '/../../config/app.php';
+        // config is located at app/config/app.php
+        $config = require_once __DIR__ . '/app.php';
         try {
             $this->pdo = new \PDO(
                 "mysql:host={$config['db']['host']};dbname={$config['db']['name']};charset=utf8",

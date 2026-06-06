@@ -26,9 +26,18 @@ $router->get('/admin/students', 'AdminController@students');
 // Teacher Routes
 $router->get('/teacher/dashboard', 'TeacherController@dashboard');
 $router->get('/teacher/subjects', 'TeacherController@subjects');
+$router->post('/teacher/subjects/edit', 'TeacherController@editSubject');
 $router->get('/teacher/sections', 'TeacherController@sections');
 $router->get('/teacher/students', 'TeacherController@students');
+$router->post('/teacher/students/{sectionId}/add', 'TeacherController@addStudent');
+$router->post('/teacher/students/{sectionId}/edit', 'TeacherController@editStudent');
+$router->get('/teacher/students/{sectionId}/delete/{id}', 'TeacherController@deleteStudent');
+$router->post('/teacher/students/{sectionId}/edit-username', 'TeacherController@editUsername');
+$router->post('/teacher/students/{sectionId}/edit-password', 'TeacherController@editPassword');
+$router->get('/teacher/students/{sectionId}/remove-login/{id}', 'TeacherController@removeLogin');
+$router->get('/teacher/students/{sectionId}/create-login/{id}', 'TeacherController@createLogin');
 $router->get('/teacher/attendance', 'TeacherController@attendance');
+$router->get('/teacher/attendance/load', 'TeacherController@loadAttendance');
 $router->post('/teacher/attendance/save', 'TeacherController@saveAttendance');
 
 // Student Routes
@@ -39,6 +48,9 @@ $router->post('/student/record-attendance', 'StudentController@recordAttendance'
 // QR Routes
 $router->post('/qr/generate', 'QRController@generate');
 $router->get('/qr/verify/{token}', 'QRController@verify');
+$router->get('/qr/show', 'QRController@show');
+$router->get('/qr/active', 'QRController@active');
+$router->post('/qr/deactivate', 'QRController@deactivate');
 
 // API Routes
 $router->get('/api/subjects', 'ApiController@getSubjects');
