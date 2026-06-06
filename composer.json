@@ -1,0 +1,16 @@
+{
+    "name": "internshiptracker/app",
+    "description": "Internship Tracker System",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "ext-session": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
